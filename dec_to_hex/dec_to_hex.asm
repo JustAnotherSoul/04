@@ -37,10 +37,12 @@ start:
 	call end
 
 printBinary:
-	push	ebp
-	mov	ebp, esp
-	mov 	esi, [esp+8]
-		
+	push	ebp 		;Push so we can go back
+	mov	ebp, esp	;Alright, now we're aligning everything
+	mov 	esi, [esp+8]	;Our parameter is here!
+	;Something like this: xor with 10000000 repeatedly to assemble the number: bitmask. 0b1000 0000 0000 0000 = 0x8000
+	
+	
 	
 
 	mov	esp, ebp
