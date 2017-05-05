@@ -1,0 +1,23 @@
+     1                                  global start
+     2                                  section .data
+     3 00000000 48656C6C6F2C20776F-     msg: db "Hello, world!", 10
+     4 00000009 726C64210A         
+     5                                  len: equ $-msg
+     6                                  
+     7                                  section .text
+     8                                  start:
+     9 00000000 90                      	nop
+    10 00000001 66680E000000            	push	dword len
+    11 00000007 6668[00000000]          	push	dword msg
+    12 0000000D 666801000000            	push 	dword 1
+    13 00000013 66B804000000            	mov	eax,4
+    14 00000019 6681EC04000000          	sub 	esp,4	
+    15 00000020 CD80                    	int 	0x80
+    16 00000022 6681C410000000          	add 	esp,16
+    17                                  	
+    18 00000029 666800000000            	push	dword 0
+    19 0000002F 66B801000000            	mov	eax,1
+    20 00000035 6681EC0C000000          	sub	esp,12
+    21 0000003C CD80                    	int 	0x80
+    22                                  
+    23                                  
