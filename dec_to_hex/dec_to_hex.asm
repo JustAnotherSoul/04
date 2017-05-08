@@ -1,4 +1,5 @@
 global start
+EXTERN printBinary
 section .data
 msg: db "Enter your number:", 10
 len: equ $-msg
@@ -10,7 +11,7 @@ start:
 	push	dword msg	;Message to write
 	push	dword 1		;STDOUT
 	mov 	eax,4		;We are writing
-	sub 	esp 4		;Making space on the stack??	
+	sub 	esp,4		;Making space on the stack??	
 	int 	0x80		;SYSCALL
 	add 	esp,16		;Move back
 	
@@ -32,22 +33,11 @@ start:
 
 	;Okay now we have ASCII characters. 
 	;I would like to write a function to print out the value on the stack as a binary number, just to see it.
-	push ebx
-	call printBinary
+	push 	dword [ebx]
+	call 	printBinary
+	pop 	ebx
 	call end
 
-printBinary:
-	push	ebp 		;Push so we can go back
-	mov	ebp, esp	;Alright, now we're aligning everything
-	mov 	esi, [esp+8]	;Our parameter is here!
-	;Something like this: xor with 10000000 repeatedly to assemble the number: bitmask. 0b1000 0000 0000 0000 = 0x8000
-	
-	
-	
-
-	mov	esp, ebp
-	pop 	ebp
-	ret
 end:
 	add 	esp,16		;Move back
 	push 	dword 0		;Exit code

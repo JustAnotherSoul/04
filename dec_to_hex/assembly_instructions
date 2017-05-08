@@ -1,0 +1,2 @@
+nasm -f macho print_binary.asm -o print_binary.o -l print_binary.list
+nasm -f macho dec_to_hex.asm -o dec.o; ld -macosx_version_min 10.7.0 -o dec dec.o print_binary.o
