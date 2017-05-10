@@ -28,7 +28,7 @@ print_zero:
 	sub 	esp,4		;Make space per BSD calling convention
 	int 	0x80		;SYSCALL
 	add 	esp,16		;Functionally pop
-	pop 	edx
+	pop 	edx		
 	shl 	ecx,1		;Move to next bit and loop
 	shl	edx,1
 	jmp 	my_loop		;Keep going
@@ -42,7 +42,7 @@ print_one:
 	add 	esp,16		;Functionally pop
 	pop 	edx
 	shl 	ecx,1		;Move to the next bit
-	shl 	edx,1
+	shl 	edx,1		;For both the counter and the data
 	jmp 	my_loop		;and loop
 done_label:
 	;All done!
@@ -51,8 +51,3 @@ done_label:
 	pop 	ebp
 	ret
 	;Return to caller
-
-	push 	dword 0
-	mov	eax,1
-	sub	esp,12
-	int 	0x80
